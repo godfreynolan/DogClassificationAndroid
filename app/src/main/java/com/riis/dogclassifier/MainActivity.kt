@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
             item.label = recognition[0].title
             textView.text = item.getTitle()
         } else {
-            textView.text = "Unknown Dog"
+            textView.text = getString(R.string.unknown)
         }
     }
 }

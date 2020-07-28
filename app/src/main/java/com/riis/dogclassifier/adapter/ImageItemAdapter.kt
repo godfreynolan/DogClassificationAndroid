@@ -31,7 +31,7 @@ class ImageItemAdapter(val imageItems: List<ImageItem>, val classifier: Classifi
                     item.confidence = recognitions[0].confidence
                     item.label = recognitions[0].title
                 } else {
-                    item.label = "Unknown Dog"
+                    item.label = view!!.resources.getString(R.string.unknown)
                     item.confidence = 0f
                 }
                 notifyItemChanged(adapterPosition)
