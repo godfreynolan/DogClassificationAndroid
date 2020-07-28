@@ -130,6 +130,7 @@ class Classifier(assetManager: AssetManager, modelPath: String, labelPath: Strin
             recognitions.add(pq.poll())
         }
         // recognitions are a string containing the label and the confidence
+        Log.d("Recognition", recognitions.isEmpty().toString())
         return recognitions
     }
 

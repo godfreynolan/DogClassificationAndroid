@@ -2,4 +2,6 @@
     <string name="app_name">Doggie in the Window</string>
     <string name="uploadedContentDescription">Uploaded image from gallery.</string>
     <string name="clickClassify">Click to Classify</string>
+
+    <string name="unknown">Unknown Dog</string>
 </resources>

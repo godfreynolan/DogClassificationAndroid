@@ -1,5 +1,6 @@
 package com.riis.dogclassifier.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,11 +26,15 @@ class ImageItemAdapter(val imageItems: List<ImageItem>, val classifier: Classifi
             if(adapterPosition != RecyclerView.NO_POSITION){
                 val item: ImageItem = imageItems[adapterPosition]
                 val recognitions = classifier.recognizeImage(item.image)
+                Log.d("Recognition(Classifier)", recognitions.isEmpty().toString())
                 if(recognitions.isNotEmpty()){
                     item.confidence = recognitions[0].confidence
                     item.label = recognitions[0].title
-                    notifyItemChanged(adapterPosition)
+                } else {
+                    item.label = view!!.resources.getString(R.string.unknown)
+                    item.confidence = 0f
                 }
+                notifyItemChanged(adapterPosition)
             }
         }
     }

@@ -104,15 +104,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startClassifier(item: ImageItem){
+        val textView = findViewById<TextView>(R.id.uploadedTextView)
         //loads the tflite and label files
         val classifier = Classifier(assets, "dog_detector_model.tflite", "labels.txt", 224)
         val recognition = classifier.recognizeImage(item.image)
+        //displays the dog title and confidence
         if(recognition.isNotEmpty()){
             item.confidence = recognition[0].confidence
             item.label = recognition[0].title
+            textView.text = item.getTitle()
+        } else {
+            textView.text = getString(R.string.unknown)
         }
-        //displays the dog title and confidence
-        val textView = findViewById<TextView>(R.id.uploadedTextView)
-        textView.text = item.getTitle()
     }
 }
