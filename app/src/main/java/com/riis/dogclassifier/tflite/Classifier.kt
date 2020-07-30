@@ -20,7 +20,7 @@ class Classifier(assetManager: AssetManager, modelPath: String, labelPath: Strin
     private var labelList: List<String>
     private val INPUT_SIZE: Int = inputSize
     private val PIXEL_SIZE: Int = 3
-    private val IMAGE_MEAN:Float = 128.0f
+    private val IMAGE_MEAN:Float = 0f
     private val IMAGE_STD:Float = 128.0f
     private val MAX_RESULTS = 1
     private val THRESHOLD = 0.3f // 30% confidence
