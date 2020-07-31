@@ -21,15 +21,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Checks to see what the current fragment is
+        // If the app has just started, then the sample images fragment will be shown
         if(getCurrentFragment() == null){
             loadFragment(FragmentTags.Sample)
         }
 
+        // Creates the backStackChangedListener
+        // Used to update the highlighted items in the navigation drawer
         loadBackStackChangedListener()
 
+        //Gets the topAppBar and creates a toggle to open and close the drawer
         val topAppBar = findViewById<MaterialToolbar>(R.id.topAppBar)
-
         val toggle = ActionBarDrawerToggle(this, drawer_layout, topAppBar, R.string.open_nav_drawer, R.string.close_nav_drawer)
+
         //adds the toggle listener
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
@@ -37,40 +42,48 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
+            // If the tab selected is the sample images
+            // Each tab also checks if the tab is already selected before loading the fragment
+            // This makes sure the same fragment doesn't get loaded multiple times
             R.id.nav_sample -> {
                 if(!nav_view.menu.getItem(0).isChecked) {
                     loadFragment(FragmentTags.Sample)
                 }
             }
+            // If the tab selected is the upload an image
             R.id.nav_upload -> {
                 if(!nav_view.menu.getItem(1).isChecked) {
                     loadFragment(FragmentTags.Upload)
                 }
             }
+            // If the tab selected is the dog name list view
             R.id.nav_list -> {
                 if(!nav_view.menu.getItem(2).isChecked) {
                     loadFragment(FragmentTags.List)
                 }
             }
+            // If the tab selected is the about tab
             R.id.nav_about -> {
                 if(!nav_view.menu.getItem(3).isChecked) {
                     loadFragment(FragmentTags.About)
                 }
             }
         }
+        //Closes the drawer after a tab is clicked
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
 
     private fun loadBackStackChangedListener(){
+        // Used when the back button is clicked to change the highlighted
+        // item in the navigation drawer
         supportFragmentManager.addOnBackStackChangedListener {
-            //gets current fragment loaded
+            // Whem the back button is pressed, then the current fragment is obtained
             val currentFrag = getCurrentFragment()
             //checks if the fragment is null
             if (currentFrag != null) {
-                //checks which fragment is loaded and highlights the menu item
+                //checks which fragment is loaded and highlights that item in the menu
                 when(currentFrag.tag) {
                     FragmentTags.Sample.tag -> {
                         nav_view.menu.getItem(0).isChecked = true
@@ -99,15 +112,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return if(supportFragmentManager.backStackEntryCount == 0){
             null
         }else {
-            //gets the current fragment by subtracting 1 from the back-stack entry count and getting its name
+            //gets the current fragment by subtracting 1 from the back-stack entry count and getting its tag
             val tag = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount -1).name
             supportFragmentManager.findFragmentByTag(tag)
         }
     }
 
     private fun loadFragment(fragment: FragmentTags){
-
+        // Creates a transaction for replacing the fragment loaded
         val transaction = supportFragmentManager.beginTransaction()
+        // Gets the fragment selected
         val frag = when(fragment){
             FragmentTags.Sample -> {
                 FragmentSample()
@@ -123,12 +137,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
+        // Replaces the fragment that is loaded in the fragment container
         transaction.replace(R.id.fragment_container, frag, fragment.tag)
         transaction.addToBackStack(fragment.tag)
         transaction.commit()
     }
 
     override fun onBackPressed() {
+        // Closes the navigation drawer if it is open
+        // when the back button is pressed
+        // prevents loading to previous fragment if it is open
         if(drawer_layout.isDrawerOpen(GravityCompat.START)){
             drawer_layout.closeDrawer(GravityCompat.START)
         }else{
@@ -136,6 +154,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    // Enumeration for all fragment tags
     enum class FragmentTags(val tag: String) {
         Sample("sample_tag"),
         Upload("upload_tag"),

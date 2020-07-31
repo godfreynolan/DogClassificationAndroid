@@ -1,11 +1,19 @@
 package com.riis.dogclassifier.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.riis.dogclassifier.R
+import com.riis.dogclassifier.adapter.LabelListAdapter
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
+import java.io.IOException
 
 class FragmentList(): Fragment() {
     override fun onCreateView(
@@ -13,6 +21,25 @@ class FragmentList(): Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        // Gets the id of the recycler view
+        val recyclerView = view.findViewById<RecyclerView>(R.id.labelListRecyclerView)
+
+        try {
+            // Opens the labels file from the assets folder and puts it into a List
+            val labelArr =
+                context!!.assets.open("CapitalLabels.txt").bufferedReader().useLines { it.toList() }
+            // Creates the adapter with the labels
+            val adapter = LabelListAdapter(labelArr)
+
+            // Sets up the recycler view
+            val layoutManager = LinearLayoutManager(activity!!.applicationContext)
+            recyclerView.layoutManager = layoutManager
+            recyclerView.adapter = adapter
+
+        } catch (e: IOException){
+            Log.i("Error", e.localizedMessage)
+        }
+        return view
     }
 }

@@ -22,7 +22,9 @@ class FragmentSample: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_sample, container, false)
-        val classifier = Classifier(context!!.assets, "dog_detector_model.tflite", "labels.txt", 224)
+
+        // Sets up the classifier, recycler view, and labels
+        val classifier = Classifier(context!!.assets, "dog_detector_model.tflite", "CapitalLabels.txt", 224)
         val imageListView: RecyclerView = view.findViewById(R.id.image_list_view)
         val items = getImageItems()
 
@@ -41,6 +43,7 @@ class FragmentSample: Fragment() {
         return view
     }
 
+    // Adds all text in the labels file to the list
     private fun getImageItems(): MutableList<ImageItem>{
         val items = mutableListOf<ImageItem>()
         val fileNames = context!!.assets.list("images")

@@ -55,11 +55,7 @@ class ImageItemAdapter(val imageItems: List<ImageItem>, val classifier: Classifi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val imageItem: ImageItem = imageItems.get(position)
-        val textView = holder.dogNameView
-        textView.setText(imageItem.getTitle())
-
-        val imageView = holder.dogImageView
-        imageView.setImageBitmap(imageItem.image)
+        holder.dogNameView.text = imageItems[position].getTitle()
+        holder.dogImageView.setImageBitmap(imageItems[position].image)
     }
 }

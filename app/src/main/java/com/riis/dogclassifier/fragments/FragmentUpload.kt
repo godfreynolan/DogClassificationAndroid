@@ -32,9 +32,11 @@ class FragmentUpload: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_upload, container, false)
 
+        // Gets id of the FloatingActionButton to upload photos from the gallery
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
 
         fab.setOnClickListener{
+            // Opens gallery when the button is clicked
             openGallery()
         }
 
@@ -42,22 +44,30 @@ class FragmentUpload: Fragment() {
     }
 
     private fun openGallery(){
+        // Creates intent for selecting an image from the gallery
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
+
+        // Starts the activity
         startActivityForResult(intent, REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 100 && resultCode == Activity.RESULT_OK){
+        // If the request Code is correct and the activity completed correctly
+        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            // Gets the uri of the selected image
             val uri = data?.data
 
-            Log.i("ActivityForResult", uri.toString())
+            //gets all necessary elements from the layout
             val imageView = view!!.findViewById<ImageView>(R.id.uploadedImage)
             val directionsTextView = view!!.findViewById<TextView>(R.id.directionsTextView)
+            val uploadItem = view!!.findViewById<View>(R.id.includeUpload)
+
+            // Sets the image view to the selected image
             imageView.setImageURI(data?.data)
 
-            val uploadItem = view!!.findViewById<View>(R.id.includeUpload)
+            // Makes the image and text visible and hides the direction text
             directionsTextView.visibility = View.INVISIBLE
             uploadItem.visibility = View.VISIBLE
 
@@ -75,8 +85,9 @@ class FragmentUpload: Fragment() {
     private fun startClassifier(item: ImageItem){
         val textView = view?.findViewById<TextView>(R.id.uploadedTextView)
         //loads the tflite and label files
-        val classifier = Classifier(activity!!.assets, "dog_detector_model.tflite", "labels.txt", 224)
+        val classifier = Classifier(activity!!.assets, "dog_detector_model.tflite", "CapitalLabels.txt", 224)
         val recognition = classifier.recognizeImage(item.image)
+
         //displays the dog title and confidence
         if(recognition.isNotEmpty()){
             item.confidence = recognition[0].confidence
