@@ -37,39 +37,14 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-
-            <include
-                android:id="@+id/includeUpload"
-                layout="@layout/uploaded_image_item"
+            <FrameLayout
+                android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
+                android:layout_height="match_parent"
+                android:elevation="0dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/image_list_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/white"
-            android:clickable="true"
-            android:contentDescription="@string/uploadedContentDescription"
-            android:focusable="true"
-            app:srcCompat="@drawable/ic_plus_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
