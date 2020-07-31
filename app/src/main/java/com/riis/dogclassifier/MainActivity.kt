@@ -6,27 +6,33 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.Layout
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.riis.dogclassifier.adapter.ImageItemAdapter
 import com.riis.dogclassifier.model.ImageItem
 import com.riis.dogclassifier.tflite.Classifier
 import com.riis.dogclassifier.R
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.InputStream
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     val REQUEST_CODE = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val topAppBar = findViewById<MaterialToolbar>(R.id.topAppBar)
 
         val classifier: Classifier =
             Classifier(
@@ -53,6 +59,16 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener{
             openGallery()
         }
+
+        topAppBar.setNavigationOnClickListener {
+            // Handle navigation icon press
+        }
+
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, topAppBar, R.string.open_nav_drawer, R.string.close_nav_drawer)
+        //adds the toggle listener
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+        nav_view.setNavigationItemSelectedListener(this)
 
         imageListView.layoutManager = staggeredGridLayoutManager
         imageListView.adapter = adapter
@@ -116,5 +132,28 @@ class MainActivity : AppCompatActivity() {
         } else {
             textView.text = getString(R.string.unknown)
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_sample -> {
+                // Handle favorite icon press
+                true
+            }
+            R.id.nav_upload -> {
+                // Handle search icon press
+                true
+            }
+            R.id.nav_list -> {
+                // Handle more item (inside overflow menu) press
+                true
+            }
+            R.id.nav_about -> {
+                // Handle more item (inside overflow menu) press
+                true
+            }
+            else -> false
+        }
+        return false
     }
 }
