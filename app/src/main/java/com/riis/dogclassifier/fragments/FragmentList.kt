@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.riis.dogclassifier.R
@@ -34,6 +35,7 @@ class FragmentList(): Fragment() {
 
             // Sets up the recycler view
             val layoutManager = LinearLayoutManager(activity!!.applicationContext)
+            recyclerView.addItemDecoration(DividerItemDecoration(activity!!.applicationContext, LinearLayoutManager.VERTICAL))
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = adapter
 

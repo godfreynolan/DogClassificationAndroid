@@ -12,6 +12,7 @@
 
     <string name="open_nav_drawer">Open Navigation Drawer</string>
     <string name="close_nav_drawer">Close Navigation Drawer</string>
+    <string name="nav_menu_header">Menu</string>
 
     <string name="upload_add_image">Click the \"+\" to upload an image</string>
 

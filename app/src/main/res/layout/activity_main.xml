@@ -54,7 +54,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/navigation_items" />
+        app:menu="@menu/navigation_items"
+        app:headerLayout="@layout/nav_header"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
