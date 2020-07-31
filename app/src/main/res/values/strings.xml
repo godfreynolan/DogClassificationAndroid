@@ -14,4 +14,7 @@
     <string name="close_nav_drawer">Close Navigation Drawer</string>
 
     <string name="upload_add_image">Click the \"+\" to upload an image</string>
+
+    <string name="about_DataSet">&lt;a href="https://www.tensorflow.org/datasets/catalog/stanford_dogs">Stanford Dog Dataset&lt;/a></string>
+    <string name="about_GitHub">&lt;a href="https://github.com/riis/DogClassificationAndroid">Project Github&lt;/a></string>
 </resources>
