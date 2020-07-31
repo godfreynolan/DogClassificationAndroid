@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Checks to see what the current fragment is
         // If the app has just started, then the sample images fragment will be shown
         if(getCurrentFragment() == null){
-            loadFragment(FragmentTags.Sample)
+            val frag = FragmentSample()
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, frag, FragmentTags.Sample.tag).commit()
         }
 
         // Creates the backStackChangedListener
