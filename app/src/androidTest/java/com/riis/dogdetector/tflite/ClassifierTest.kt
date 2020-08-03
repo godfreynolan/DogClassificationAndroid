@@ -20,18 +20,16 @@ class ClassifierTest {
 
 
     private val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    private val testContext = InstrumentationRegistry.getInstrumentation().context
-
 
     @Test
     fun testClassifyImage(){
         val classifier = Classifier(
             appContext.assets,
-            "model.tflite",
+            "dog_detector_model.tflite",
             "labels.txt",
             224
         )
-        val testImageStream: InputStream = this.testContext.assets.open("drawable/yorkshire_terrier.bmp")
+        val testImageStream: InputStream = appContext.assets.open("images/yorkshire_terrier.bmp")
         val testImage:Bitmap = BitmapFactory.decodeStream(testImageStream)
         val recognitions = classifier.recognizeImage(testImage)
         assertNotEquals(0, recognitions.size)
