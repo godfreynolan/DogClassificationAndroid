@@ -29,7 +29,7 @@ class FragmentList(): Fragment() {
         try {
             // Opens the labels file from the assets folder and puts it into a List
             val labelArr =
-                context!!.assets.open("CapitalLabels.txt").bufferedReader().useLines { it.toList() }
+                context!!.assets.open(context!!.getString(R.string.label_name)).bufferedReader().useLines { it.toList() }
             // Creates the adapter with the labels
             val adapter = LabelListAdapter(labelArr)
 

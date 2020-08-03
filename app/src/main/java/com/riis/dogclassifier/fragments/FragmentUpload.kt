@@ -85,7 +85,7 @@ class FragmentUpload: Fragment() {
     private fun startClassifier(item: ImageItem){
         val textView = view?.findViewById<TextView>(R.id.uploadedTextView)
         //loads the tflite and label files
-        val classifier = Classifier(activity!!.assets, "dog_detector_model.tflite", "CapitalLabels.txt", 224)
+        val classifier = Classifier(activity!!.assets, context!!.getString(R.string.model_name), context!!.getString(R.string.label_name), 224)
         val recognition = classifier.recognizeImage(item.image)
 
         //displays the dog title and confidence

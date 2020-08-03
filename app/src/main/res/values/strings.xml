@@ -4,6 +4,9 @@
     <string name="clickClassify">Click to Classify</string>
 
     <string name="unknown">Unknown Dog</string>
+    <string name="model_name">dog_detector_model.tflite</string>
+    <string name="label_name">CapitalLabels.txt</string>
+    <string name="sample_image_type">.*.bmp</string>
 
     <string name="nav_sample">Sample Images</string>
     <string name="nav_upload">Upload an Image</string>
@@ -17,5 +20,5 @@
     <string name="upload_add_image">Click the \"+\" to upload an image</string>
 
     <string name="about_DataSet">&lt;a href="https://www.tensorflow.org/datasets/catalog/stanford_dogs">Stanford Dog Dataset&lt;/a></string>
-    <string name="about_GitHub">&lt;a href="https://github.com/riis/DogClassificationAndroid">Project Github&lt;/a></string>
+    <string name="about_GitHub">&lt;a href="https://github.com/riis/DogClassificationAndroid">Doggie in the Window Github&lt;/a></string>
 </resources>

@@ -24,7 +24,7 @@ class FragmentSample: Fragment() {
         val view = inflater.inflate(R.layout.fragment_sample, container, false)
 
         // Sets up the classifier, recycler view, and labels
-        val classifier = Classifier(context!!.assets, "dog_detector_model.tflite", "CapitalLabels.txt", 224)
+        val classifier = Classifier(context!!.assets, context!!.getString(R.string.model_name), context!!.getString(R.string.label_name), 224)
         val imageListView: RecyclerView = view.findViewById(R.id.image_list_view)
         val items = getImageItems()
 
@@ -49,7 +49,7 @@ class FragmentSample: Fragment() {
         val fileNames = context!!.assets.list("images")
         if (fileNames != null) {
             for (name in fileNames){
-                if(name.matches(""".*.bmp""".toRegex())){
+                if(name.matches(context!!.getString(R.string.sample_image_type).toRegex())){
                     val stream: InputStream = context!!.assets.open("images/$name")
                     val image: Bitmap = BitmapFactory.decodeStream(stream)
                     val item = ImageItem(image)

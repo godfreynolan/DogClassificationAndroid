@@ -16,8 +16,8 @@ class ImageItemAdapter(val imageItems: List<ImageItem>, val classifier: Classifi
 
 
     inner class ViewHolder(imageItemView: View) : RecyclerView.ViewHolder(imageItemView), View.OnClickListener {
-        val dogNameView = itemView.findViewById<TextView>(R.id.dogName)
-        val dogImageView = itemView.findViewById<ImageView>(R.id.dogImage)
+        val sampleNameView = itemView.findViewById<TextView>(R.id.sampleName)
+        val sampleImageView = itemView.findViewById<ImageView>(R.id.sampleImage)
         init{
             itemView.setOnClickListener(this)
         }
@@ -55,7 +55,7 @@ class ImageItemAdapter(val imageItems: List<ImageItem>, val classifier: Classifi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.dogNameView.text = imageItems[position].getTitle()
-        holder.dogImageView.setImageBitmap(imageItems[position].image)
+        holder.sampleNameView.text = imageItems[position].getTitle()
+        holder.sampleImageView.setImageBitmap(imageItems[position].image)
     }
 }
